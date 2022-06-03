@@ -1,0 +1,33 @@
+import React from 'react';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+function Employee({ id, imageUrl, name , email, phone, jobTitle, employeeCode }) {
+
+        return (
+                <div class="w-80 h-96 py-10 px-8 bg-white rounded-xl grid grid-row-5 gap-4 border border-solid border-gray-200">
+                        <div class="grid row-span-2 grid-cols-3 gap-4 h-40">
+                                <img src={imageUrl} alt="image" class="col-span-2 rounded-xl" />
+                                <div class="grid grid-flow-row">
+                                        <div class="text-l font-bold align-middle">
+                                                <p>{name}</p>
+                                        </div>
+                                        <p>{jobTitle}</p>
+                                </div>
+                        </div>
+                        <p>{email}</p>
+                        <p>{phone}</p>
+                        <div class="flex flex-row-reverse gap-2">
+                                <div class="bg-amber-200 border border-gray-400 rounded-lg p-2">
+                                        <DeleteIcon /> 
+                                </div>                                
+                                <div class="bg-amber-200 border border-gray-400 rounded-lg p-2">
+                                        <EditIcon /> 
+                                </div>
+                        </div>
+
+                </div >
+        )
+}
+
+export default Employee;
