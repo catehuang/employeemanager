@@ -6,29 +6,24 @@ import { Link } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useNavigate } from 'react-router-dom';
-import SearchIcon from '@material-ui/icons/Search';
+
 
 function Home() {
-        const [employees, setEmployees] = useState([]);
-        const [name, setName] = useState('');
-        const [employeeCode, setEmployeeCode] = useState('');
-        const [jobTitle, setJobTitle] = useState('');
-        const [email, setEmail] = useState('');
-        const [phone, setPhone] = useState('');
-        const [imageUrl, setImageUrl] = useState('');
+        const [allEmployees, setAllEmployees] = useState([]);
         const navigate = useNavigate();
+        const [searchValue, setSearchValue] = useState('');
 
         useEffect(() => {
                 const getAllEmployees = async () => {
                         try {
                                 const response = await axios.get('/all');
-                                setEmployees(response.data);
+                                setAllEmployees(response.data);
                         } catch (err) {
                                 console.log(`Error: ${err.message}`);
                         }
                 }
                 getAllEmployees();
-        }, [employees]) // only run this when the component didMount
+        }, [allEmployees]) // only run this when the component didMount
 
         const deleteEmployee = async (id) => {
                 try {
@@ -39,42 +34,38 @@ function Home() {
                 }
         };
 
-        const findEmployeeById = (id) => {
-                axios.get('http://localhost:8080/employee/find')
-                        .then(res => {
-                                console.log(res);
-                        });
-        };
-
-
-        const updateEmployee = () => {
-                axios.update('http://localhost:8080/employee/update')
-                        .then(res => {
-                                console.log(res);
-                        });
-        };
+        const filterEmployees = allEmployees.filter((data) => {
+                if (searchValue === '') {
+                        return data;
+                }
+                else {
+                        return data.name.toLowerCase().includes(searchValue);
+                }
+        }, [searchValue]);
 
         return (
-                <div class="bg-yellow-50 h-full">
+                <div class="bg-yellow-50 min-h-screen">
                         <Header />
 
                         <div class="flex m-10">
                                 <Link to='/add'>
-                                        <div class="flex space-x-1 bg-amber-200 w-40 p-3 rounded-lg border border-gray-400">
+                                        <div class="flex space-x-1 bg-amber-200 w-40 p-3 rounded-lg border border-amber-400">
                                                 <AddBoxIcon />
                                                 <p class="text-l">Add Employee</p>
                                         </div>
                                 </Link>
-                                <div class="mx-auto ">
-                                        <input type="text" placeholder="Search ..." class="rounded-l-lg p-2.5 border-t mr-0 border-b border-l text-gray-800 border-gray-400" />
-                                        <span class="px-3 rounded-r-lg bg-yellow-400  text-gray-800 font-bold p-3 border-gray-400 border-t border-b border-r"><SearchIcon /></span>
+                                <div class="mx-auto">
+                                        <input type="text" placeholder="Search ..." class="w-64 p-3 rounded-lg border border-amber-400 focus:outline-none focus:border-amber-400 focus:ring-amber-400 focus:ring-1" onChange={(e) => {
+                                                setSearchValue(e.target.value.toLowerCase());
+                                        }} />
                                 </div>
                         </div>
 
                         <div class="w-4/5 flex flex-wrap gap-10  mx-auto place-items-center">
 
-                                {employees.map(employee => (
-                                        <div class="w-80 h-102 py-10 px-8 bg-white rounded-xl grid grid-row-5 gap-4 border border-solid border-gray-200" key={employee.id}>
+                                {/* {allEmployees.map(employee => ( */}
+                                {filterEmployees.map((employee) => (
+                                        <div class="w-80 h-102 py-10 px-8 bg-white rounded-xl grid grid-row-5 gap-4 border border-solid border-amber-400" key={employee.id}>
                                                 <div class="grid grid-cols-2 gap-4 h-40">
                                                         <img src={employee.imageUrl} alt="image" class="rounded-xl h-36 mx-auto" />
                                                         <div class="grid grid-flow-row">
@@ -85,29 +76,20 @@ function Home() {
                                                                 <p>{employee.employeeCode}</p>
                                                         </div>
                                                 </div>
-                                                
+
                                                 <p>{employee.email}</p>
                                                 <p>{employee.phone}</p>
                                                 <div class="flex flex-row-reverse gap-2">
-                                                        <div class="bg-amber-200 border border-gray-400 rounded-lg p-2" onClick={() => deleteEmployee(employee.id)}>
+                                                        <div class="bg-amber-200 border border-amber-400 rounded-lg p-2" onClick={() => deleteEmployee(employee.id)}>
                                                                 <DeleteIcon />
                                                         </div>
                                                         <Link to={"/edit/" + employee.id} >
-                                                        <div class="bg-amber-200 border border-gray-400 rounded-lg p-2">
-                                                                <EditIcon />
-                                                        </div>
+                                                                <div class="bg-amber-200 border border-amber-400 rounded-lg p-2">
+                                                                        <EditIcon />
+                                                                </div>
                                                         </Link>
                                                 </div>
                                         </div >
-                                        // <Employee key={employee.id}
-                                        //         employeeId = {employee.id}
-                                        //         name = {employee.name}
-                                        //         email = {employee.email}
-                                        //         phone = {employee.phone}
-                                        //         jobTitle = {employee.jobTitle}
-                                        //         imageUrl = {employee.emailUrl}
-                                        //         employeeCode = {employee.employeeCode}
-                                        ///>
                                 ))}
                         </div>
 
