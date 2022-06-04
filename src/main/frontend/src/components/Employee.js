@@ -4,16 +4,16 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function Employee({ employeeId, imageUrl, name , email, phone, jobTitle, employeeCode }) {
+function Employee({ employeeId, imageUrl, name, email, phone, jobTitle, employeeCode }) {
 
         const navigate = useNavigate();
-        const id = {employeeId};
+        const id = { employeeId };
 
         const deleteEmployee = async (id) => {
                 try {
                         await axios.delete(`/delete/${id}`).then(
-                                ()=> {
-                                 navigate('/');       
+                                () => {
+                                        navigate('/');
                                 }
                         )
                 } catch (err) {
@@ -26,21 +26,19 @@ function Employee({ employeeId, imageUrl, name , email, phone, jobTitle, employe
                         <div class="grid row-span-2 grid-cols-3 gap-4 h-40">
                                 <img src={imageUrl} alt="image" class="col-span-2 rounded-xl" />
                                 <div class="grid grid-flow-row">
-                                        <div class="text-l font-bold align-middle">
-                                                <p>{name}</p>
-                                        </div>
+                                        <p>{employeeCode}</p>
+                                        <p class="text-l font-bold align-middle">{name}</p>
                                         <p>{jobTitle}</p>
                                 </div>
                         </div>
-                        <p>{employeeCode}</p>
                         <p>{email}</p>
                         <p>{phone}</p>
                         <div class="flex flex-row-reverse gap-2">
                                 <div class="bg-amber-200 border border-gray-400 rounded-lg p-2" onClick={deleteEmployee}>
-                                        <DeleteIcon /> 
-                                </div>                                
+                                        <DeleteIcon />
+                                </div>
                                 <div class="bg-amber-200 border border-gray-400 rounded-lg p-2">
-                                        <EditIcon /> 
+                                        <EditIcon />
                                 </div>
                         </div>
 

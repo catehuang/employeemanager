@@ -57,9 +57,9 @@ function EditEmployee() {
         return (
                 <div class="bg-yellow-50 min-h-screen">
                         <Header />
-                        <div class="w-1/4 h-120 mx-auto">
+                        <div class="h-120 mx-auto">
                                 <h2 class="text-center text-xl font-bold my-10">Edit an Employee</h2>
-                                <form class="min-w-96 border border-amber-400 rounded-lg p-5" onSubmit={updateEmployee} >
+                                <form class="w-96 border border-amber-400 rounded-lg p-5 mx-auto" onSubmit={updateEmployee} >
                                         <div class="grid grid-cols-2">
                                                 <div class="px-5">
                                                         <img src={imageUrl} alt="" class="border border-gray-300 rounded-lg mx-auto h-56" />

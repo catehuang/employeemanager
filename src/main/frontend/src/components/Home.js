@@ -5,13 +5,11 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 import { Link } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { useNavigate } from 'react-router-dom';
-
 
 function Home() {
         const [allEmployees, setAllEmployees] = useState([]);
-        const navigate = useNavigate();
         const [searchValue, setSearchValue] = useState('');
+
 
         useEffect(() => {
                 const getAllEmployees = async () => {
@@ -32,6 +30,7 @@ function Home() {
                 } catch (err) {
                         console.log(`Error: ${err.message}`);
                 }
+                
         };
 
         const filterEmployees = allEmployees.filter((data) => {
