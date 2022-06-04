@@ -6,4 +6,3 @@ CRUD App using Spring boot, MySQL, and React
 * axio
 * react-router-dom
 * tailwind
-* react-toastify
