@@ -82,9 +82,10 @@ function Home() {
                                                                         <p>{employee.name}</p>
                                                                 </div>
                                                                 <p>{employee.jobTitle}</p>
+                                                                <p>{employee.employeeCode}</p>
                                                         </div>
                                                 </div>
-                                                <p>{employee.employeeCode}</p>
+                                                
                                                 <p>{employee.email}</p>
                                                 <p>{employee.phone}</p>
                                                 <div class="flex flex-row-reverse gap-2">
