@@ -1,8 +1,25 @@
 import React from 'react';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function Employee({ id, imageUrl, name , email, phone, jobTitle, employeeCode }) {
+function Employee({ employeeId, imageUrl, name , email, phone, jobTitle, employeeCode }) {
+
+        const navigate = useNavigate();
+        const id = {employeeId};
+
+        const deleteEmployee = async (id) => {
+                try {
+                        await axios.delete(`/delete/${id}`).then(
+                                ()=> {
+                                 navigate('/');       
+                                }
+                        )
+                } catch (err) {
+                        console.log(`Error: ${err.message}`);
+                }
+        };
 
         return (
                 <div class="w-80 h-96 py-10 px-8 bg-white rounded-xl grid grid-row-5 gap-4 border border-solid border-gray-200">
@@ -15,10 +32,11 @@ function Employee({ id, imageUrl, name , email, phone, jobTitle, employeeCode })
                                         <p>{jobTitle}</p>
                                 </div>
                         </div>
+                        <p>{employeeCode}</p>
                         <p>{email}</p>
                         <p>{phone}</p>
                         <div class="flex flex-row-reverse gap-2">
-                                <div class="bg-amber-200 border border-gray-400 rounded-lg p-2">
+                                <div class="bg-amber-200 border border-gray-400 rounded-lg p-2" onClick={deleteEmployee}>
                                         <DeleteIcon /> 
                                 </div>                                
                                 <div class="bg-amber-200 border border-gray-400 rounded-lg p-2">

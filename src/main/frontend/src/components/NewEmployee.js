@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import axios from './axios';
+import { useNavigate } from 'react-router-dom';
 
 function NewEmployee() {
         const [name, setName] = useState('');
@@ -10,10 +11,12 @@ function NewEmployee() {
         const [phone, setPhone] = useState('');
         const [imageUrl, setImageUrl] = useState('');
 
+        const navigate = useNavigate();
+
         const addEmployee = async (e) => {
                 e.preventDefault();
 
-                const response = await axios.post("/add", {
+                await axios.post('/add', {
                         name: name,
                         employeeCode: employeeCode,
                         jobTitle: jobTitle,
@@ -22,25 +25,26 @@ function NewEmployee() {
                         imageUrl: imageUrl
                 }).then(res => {
                         console.log(res);
+                        navigate('/');
                 });
         };
 
         return (
                 <div class="bg-yellow-50 h-screen">
                         <Header />
-                        <div class="w-1/4 mx-auto">
+                        <div class="w-96 h-120 mx-auto">
                                 <h2 class="text-center text-xl font-bold my-10">Add a New Employee</h2>
                                 <form class="border border-gray-600 rounded-lg p-5" onSubmit={addEmployee} >
                                         <div class="px-5">
                                                 <label htmlFor="newEmployeeName" class="block mb-1">Name</label>
-                                                <input id="newEmployeeName" type="text" class="border border-gray-300 w-full rounded-l mb-5 py-1 px-2" required onChange={
+                                                <input id="newEmployeeName" type="text" class="border border-gray-300 w-full rounded-l mb-5 py-1 px-2"  required onChange={
                                                         e => setName(e.target.value)
                                                 } />
                                         </div>
 
                                         <div class="px-5">
                                                 <label htmlFor="newEmployeeJobTitle" class="block mb-1">Job Title</label>
-                                                <input id="newEmployeeJobTitle" type="text" class="border border-gray-300 w-full rounded-l mb-5 py-1 px-2" required onChange={
+                                                <input id="newEmployeeJobTitle" type="text" class="border border-gray-300 w-full rounded-l mb-5 py-1 px-2"  onChange={
                                                         e => setJobTitle(e.target.value)
                                                 } />
                                         </div>
