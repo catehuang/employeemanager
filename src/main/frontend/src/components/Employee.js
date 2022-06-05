@@ -25,7 +25,7 @@ function Employee({ employeeId, imageUrl, name, email, phone, jobTitle, employee
                 <div class="w-80 h-96 py-10 px-8 bg-white rounded-xl grid grid-row-5 gap-4 border border-solid border-gray-200">
                         <div class="grid row-span-2 grid-cols-3 gap-4 h-40">
                                 <img src={imageUrl} alt="image" class="col-span-2 rounded-xl" />
-                                <div class="grid grid-flow-row">
+                                <div class="grid grid-flow-row py-3">
                                         <p>{employeeCode}</p>
                                         <p class="text-l font-bold align-middle">{name}</p>
                                         <p>{jobTitle}</p>

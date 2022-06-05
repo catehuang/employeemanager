@@ -67,12 +67,10 @@ function Home() {
                                         <div class="w-80 h-102 py-10 px-8 bg-white rounded-xl grid grid-row-5 gap-4 border border-solid border-amber-400" key={employee.id}>
                                                 <div class="grid grid-cols-2 gap-4 h-40">
                                                         <img src={employee.imageUrl} alt="image" class="rounded-xl h-36 mx-auto" />
-                                                        <div class="grid grid-flow-row">
-                                                                <div class="text-l font-bold align-middle">
-                                                                        <p>{employee.name}</p>
-                                                                </div>
+                                                        <div class="grid grid-flow-row py-3">
+                                                                <p class="text-l font-bold align-middle">{employee.employeeCode}</p>
+                                                                <p class="text-l font-bold align-middle">{employee.name}</p>
                                                                 <p>{employee.jobTitle}</p>
-                                                                <p>{employee.employeeCode}</p>
                                                         </div>
                                                 </div>
 

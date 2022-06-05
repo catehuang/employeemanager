@@ -19,7 +19,7 @@ public class Employee implements Serializable {
     private String jobTitle;
     private String phone;
     private String imageUrl;
-    //@Column(nullable = false, updatable = false)
+    // @Column(nullable = false, updatable = false)
     private String employeeCode;
 
     public Employee() {}
